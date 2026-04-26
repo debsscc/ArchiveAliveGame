@@ -78,6 +78,10 @@ public class PhotoMemorySequenceController : MonoBehaviour
     private PhotoMemoryBackButtonPresenter _backButtonPresenter;
     private Coroutine _audioFadeRoutine;
     private GameObject _activeButtonVfxInstance;
+    private Canvas _activeTransitionCanvas;
+    private bool _activeTransitionCanvasWasCreated;
+    private bool _activeTransitionCanvasOriginalOverrideSorting;
+    private int _activeTransitionCanvasOriginalSortingOrder;
 
     private void Awake()
     {
@@ -96,6 +100,7 @@ public class PhotoMemorySequenceController : MonoBehaviour
             backButton.onClick.RemoveListener(OnBackButtonPressed);
         }
 
+        ReleaseActivePhotoTransitionLayer();
         StopActiveButtonVfx();
     }
 
@@ -208,6 +213,7 @@ public class PhotoMemorySequenceController : MonoBehaviour
         StartEntryAudioFadeIn(entry);
 
         entry.sourcePhoto.SetAsLastSibling();
+        ApplyTransitionLayer(entry.sourcePhoto);
 
         yield return PhotoMemoryPhotoAnimator.AnimateToCenter(
             entry.sourcePhoto,
@@ -220,6 +226,8 @@ public class PhotoMemorySequenceController : MonoBehaviour
         {
             yield return new WaitForSeconds(openHoldAfterFlash);
         }
+
+        ReleaseActivePhotoTransitionLayer();
 
         entry.sourcePhoto.SetAsLastSibling();
 
@@ -236,6 +244,7 @@ public class PhotoMemorySequenceController : MonoBehaviour
         _isTransitionRunning = true;
         StartActiveEntryAudioFadeOut();
         StopActiveButtonVfx();
+        ReleaseActivePhotoTransitionLayer();
 
         _backButtonPresenter?.SetVisible(false, instant: false);
         _overlayController.StopEffect();
@@ -378,6 +387,53 @@ public class PhotoMemorySequenceController : MonoBehaviour
 
         source.volume = to;
         _audioFadeRoutine = null;
+    }
+
+    private void ApplyTransitionLayer(RectTransform photo)
+    {
+        ReleaseActivePhotoTransitionLayer();
+
+        if (photo == null)
+        {
+            return;
+        }
+
+        Canvas transitionCanvas = photo.GetComponent<Canvas>();
+        _activeTransitionCanvasWasCreated = transitionCanvas == null;
+
+        if (transitionCanvas == null)
+        {
+            transitionCanvas = photo.gameObject.AddComponent<Canvas>();
+        }
+
+        _activeTransitionCanvasOriginalOverrideSorting = transitionCanvas.overrideSorting;
+        _activeTransitionCanvasOriginalSortingOrder = transitionCanvas.sortingOrder;
+
+        transitionCanvas.overrideSorting = true;
+        transitionCanvas.sortingOrder = short.MaxValue - 10;
+
+        _activeTransitionCanvas = transitionCanvas;
+    }
+
+    private void ReleaseActivePhotoTransitionLayer()
+    {
+        if (_activeTransitionCanvas == null)
+        {
+            return;
+        }
+
+        if (_activeTransitionCanvasWasCreated)
+        {
+            Destroy(_activeTransitionCanvas);
+        }
+        else
+        {
+            _activeTransitionCanvas.overrideSorting = _activeTransitionCanvasOriginalOverrideSorting;
+            _activeTransitionCanvas.sortingOrder = _activeTransitionCanvasOriginalSortingOrder;
+        }
+
+        _activeTransitionCanvas = null;
+        _activeTransitionCanvasWasCreated = false;
     }
 
     private void SetEntryButtonsInteractable(bool interactable)

@@ -287,7 +287,7 @@ public sealed class PhotoMemoryOverlayController
         rect.anchoredPosition = Vector2.zero;
         rect.sizeDelta = Vector2.zero;
         rect.localScale = Vector3.one;
-        rect.SetSiblingIndex(overlayRect.GetSiblingIndex());
+        rect.SetAsFirstSibling();
 
         backdrop.color = new Color(0f, 0f, 0f, 0f);
         backdrop.raycastTarget = false;

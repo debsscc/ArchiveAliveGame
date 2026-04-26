@@ -47,7 +47,6 @@ public class UICursorManager : MonoBehaviour
     {
         _isDragging = false;
 
-        // Ao soltar, volta ao padrão (ou você pode chamar OnHoverCursor se quiser manter hover)
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         }
 

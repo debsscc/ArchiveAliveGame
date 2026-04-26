@@ -1152,11 +1152,15 @@ MonoBehaviour:
     overlayEffect: 2
     overlayEffectSpeed: 1
     overlayEffectIntensity: 1
+    buttonVisualEffectPrefab: {fileID: 0}
+    buttonVfxLocalOffset: {x: 0, y: 0, z: 0}
+    buttonVfxLocalScale: {x: 1, y: 1, z: 1}
     zoomScale: 5
     zoomDuration: 3
     initialAnchoredPosition: {x: 0, y: 0}
     initialScale: {x: 0, y: 0, z: 0}
     initialSiblingIndex: 0
+    initialAudioVolume: 0
   - id: 2
     triggerButton: {fileID: 2051326645}
     sourcePhoto: {fileID: 2051326640}
@@ -1166,11 +1170,15 @@ MonoBehaviour:
     overlayEffect: 2
     overlayEffectSpeed: 1
     overlayEffectIntensity: 1
-    zoomScale: 4
+    buttonVisualEffectPrefab: {fileID: 0}
+    buttonVfxLocalOffset: {x: 0, y: 0, z: 0}
+    buttonVfxLocalScale: {x: 1, y: 1, z: 1}
+    zoomScale: 3
     zoomDuration: 4
     initialAnchoredPosition: {x: 0, y: 0}
     initialScale: {x: 0, y: 0, z: 0}
     initialSiblingIndex: 0
+    initialAudioVolume: 0
   - id: 3
     triggerButton: {fileID: 235806017}
     sourcePhoto: {fileID: 235806012}
@@ -1180,11 +1188,15 @@ MonoBehaviour:
     overlayEffect: 2
     overlayEffectSpeed: 1
     overlayEffectIntensity: 1
+    buttonVisualEffectPrefab: {fileID: 0}
+    buttonVfxLocalOffset: {x: 0, y: 0, z: 0}
+    buttonVfxLocalScale: {x: 1, y: 1, z: 1}
     zoomScale: 5
     zoomDuration: 2
     initialAnchoredPosition: {x: 0, y: 0}
     initialScale: {x: 0, y: 0, z: 0}
     initialSiblingIndex: 0
+    initialAudioVolume: 0
   - id: 4
     triggerButton: {fileID: 1651652109}
     sourcePhoto: {fileID: 1651652103}
@@ -1194,11 +1206,15 @@ MonoBehaviour:
     overlayEffect: 2
     overlayEffectSpeed: 1
     overlayEffectIntensity: 1
+    buttonVisualEffectPrefab: {fileID: 0}
+    buttonVfxLocalOffset: {x: 0, y: 0, z: 0}
+    buttonVfxLocalScale: {x: 1, y: 1, z: 1}
     zoomScale: 5
     zoomDuration: 2
     initialAnchoredPosition: {x: 0, y: 0}
     initialScale: {x: 0, y: 0, z: 0}
     initialSiblingIndex: 0
+    initialAudioVolume: 0
   memoryOverlayImage: {fileID: 1999001003}
   whiteFlashOverlay: {fileID: 1041392685}
   blackFlashOverlay: {fileID: 303876264}
@@ -1210,6 +1226,8 @@ MonoBehaviour:
   whiteFlashPeak: 1
   blackFlashPeak: 1
   closeZoomDuration: 0.45
+  audioFadeInDuration: 0.25
+  audioFadeOutDuration: 0.25
   disableAllButtonsWhileOpen: 1
 --- !u!1 &1379492584
 GameObject:
@@ -1359,7 +1377,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 716, y: -465}
-  m_SizeDelta: {x: 165.96, y: 57.9}
+  m_SizeDelta: {x: 165.85, y: 61}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1383145106
 MonoBehaviour:
@@ -1418,15 +1436,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.7607843}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 8f73d07964b68cb48b5b803af772428d, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1976,8 +1994,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
