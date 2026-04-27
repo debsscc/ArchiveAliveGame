@@ -210,7 +210,7 @@ public class SceneTransitionFader : MonoBehaviour
 		_audioFadeRoutine = StartCoroutine(FadeAudioVolume(_registeredAudioSource, _audioSourceOriginalVolume, 0f, fadeOutDuration));
 
 		yield return FadeRoutine(_canvasGroup.alpha, 1f, fadeOutDuration);
-		yield return new WaitForSeconds(0.05f);
+		yield return new WaitForSecondsRealtime(0.05f);
 
 		_pendingSceneFadeIn = true;
 		AsyncOperation loadOperation = SceneManager.LoadSceneAsync(sceneName);
@@ -267,6 +267,7 @@ public class SceneTransitionFader : MonoBehaviour
 		_audioFadeRoutine = StartCoroutine(FadeAudioVolume(_registeredAudioSource, 0f, _audioSourceOriginalVolume, fadeInDuration));
 
 		yield return FadeRoutine(_canvasGroup.alpha, 0f, fadeInDuration);
+		SetOverlayAlpha(0f);
 		_isTransitioning = false;
 		_transitionRoutine = null;
 	}
@@ -329,7 +330,7 @@ public class SceneTransitionFader : MonoBehaviour
 
 		float clampedAlpha = Mathf.Clamp01(alpha);
 		_canvasGroup.alpha = clampedAlpha;
-		_canvasGroup.blocksRaycasts = clampedAlpha > 0.001f || _isTransitioning;
+		_canvasGroup.blocksRaycasts = clampedAlpha > 0.001f;
 		_canvasGroup.interactable = false;
 	}
 
