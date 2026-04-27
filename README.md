@@ -4,24 +4,6 @@ ArchiveAlive is a narrative memory-exploration game built with Unity UI.
 
 Players interact with pinned photos on a paper board, trigger cinematic zoom transitions, reveal memory overlays with visual effects, and return to the board to explore other memories.
 
-## Highlights
-
-- Menu scene with Start and Exit actions
-- Scene transition system with:
-  - Full-screen black fade out and fade in
-  - Audio fade out and fade in across scene loads
-- Interactive photo board in the Game scene
-- Photo open sequence:
-  - Bring clicked photo to visual priority during open transition
-  - Zoom-to-center animation
-  - White flash transition
-  - Memory overlay reveal
-- Photo close sequence:
-  - Black flash
-  - Overlay fade out
-  - Smooth return animation
-- Per-memory visual behavior (pulse, sway, flicker, fog)
-- Back button flow for returning from an opened memory
 
 ## Tech Stack
 
